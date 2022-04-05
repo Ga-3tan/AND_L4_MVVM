@@ -1,4 +1,4 @@
-package ch.heigvd.iict.and.labo4.models
+package heig.and.lab4.models
 
 enum class Type {
     NONE, TODO, SHOPPING, WORK, FAMILY
