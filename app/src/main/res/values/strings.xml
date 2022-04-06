@@ -1,5 +1,11 @@
 <resources>
     <string name="app_name">AND_L4</string>
-    <!-- TODO: Remove or change this placeholder text -->
-    <string name="hello_blank_fragment">Hello blank fragment</string>
+    <string name="note_list_hello">My notes</string>
+    <string name="default_value">0</string>
+    <string name="menu_generate">Generate</string>
+    <string name="menu_delete">Delete all</string>
+    <string name="sort">sort</string>
+    <string name="creation_date">Creation date</string>
+    <string name="eta">ETA</string>
+    <string name="note_list_item_icon">note list item icon</string>
 </resources>

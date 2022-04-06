@@ -2,24 +2,17 @@
 <menu xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto">
     <item
-        android:id="@+id/main_menu_sorting_button"
+        android:id="@+id/main_menu_large_sorting_button"
         android:icon="@drawable/sort"
         android:title="@string/sort"
         app:showAsAction="ifRoom|withText">
         <menu>
             <item
-                android:id="@+id/main_menu_sorting_button_creation_date"
+                android:id="@+id/main_menu_large_sorting_button_creation_date"
                 android:title="@string/creation_date" />
             <item
-                android:id="@+id/main_menu_sorting_button_ETA"
+                android:id="@+id/main_menu_large_sorting_button_ETA"
                 android:title="@string/eta" />
         </menu>
     </item>
-
-    <item
-        android:id="@+id/main_menu_sorting_button_generate"
-        android:title="@string/menu_generate" />
-    <item
-        android:id="@+id/main_menu_sorting_button_delete_all"
-        android:title="@string/menu_delete" />
 </menu>
