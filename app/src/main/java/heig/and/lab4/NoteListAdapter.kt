@@ -34,11 +34,11 @@ class NoteListAdapter(_items: List<NoteAndSchedule> = listOf()) : RecyclerView.A
         private var view: View = _view
 
         // UI elements
-        private val noteImage = view.findViewById<ImageView>(R.id.note_image)
-        private val noteTitle = view.findViewById<TextView>(R.id.note_title)
-        private val noteContent = view.findViewById<TextView>(R.id.note_content)
-        private val noteClockImage = view.findViewById<ImageView>(R.id.note_clock)
-        private val noteSchedule = view.findViewById<TextView>(R.id.note_schedule)
+        private val noteImage = view.findViewById<ImageView>(R.id.note_list_item_icon)
+        private val noteTitle = view.findViewById<TextView>(R.id.note_list_item_title)
+        private val noteContent = view.findViewById<TextView>(R.id.note_list_item_description)
+        private val noteClockImage = view.findViewById<ImageView>(R.id.note_list_item_due_icon)
+        private val noteSchedule = view.findViewById<TextView>(R.id.note_list_item_due_state)
 
         fun bind(noteAndSchedule: NoteAndSchedule) {
             // Set up the main part
@@ -49,7 +49,7 @@ class NoteListAdapter(_items: List<NoteAndSchedule> = listOf()) : RecyclerView.A
                 Type.WORK -> noteImage.setImageDrawable(AppCompatResources.getDrawable(view.context, R.drawable.work))
                 Type.NONE -> noteImage.setImageDrawable(AppCompatResources.getDrawable(view.context, R.drawable.note))
             }
-            
+
             noteTitle.text = noteAndSchedule.note.title
             noteContent.text = noteAndSchedule.note.text
 
