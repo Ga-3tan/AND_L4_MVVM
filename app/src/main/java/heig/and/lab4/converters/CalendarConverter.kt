@@ -3,7 +3,7 @@ package heig.and.lab4.converters
 import androidx.room.TypeConverter
 import java.util.*
 
-class CalendarConverters {
+class CalendarConverter {
 
     @TypeConverter
     fun toCalendar(dateLong: Long) = Calendar.getInstance().apply {
