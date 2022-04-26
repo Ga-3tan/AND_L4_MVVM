@@ -4,6 +4,9 @@ import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.view.Menu
 import android.view.MenuItem
+import android.view.View
+import androidx.activity.viewModels
+import androidx.fragment.app.activityViewModels
 
 class MainActivity : AppCompatActivity() {
 
@@ -12,6 +15,8 @@ class MainActivity : AppCompatActivity() {
         return super.onCreateOptionsMenu(menu)
     }
 
+    val notesViewModel: NotesViewModel by viewModels()
+    
     override fun onOptionsItemSelected(item: MenuItem): Boolean {
         return when(item.itemId) {
             R.id.main_menu_sorting_button_creation_date -> { println("PRESSED: Creation date"); true }
