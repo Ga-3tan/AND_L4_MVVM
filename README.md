@@ -14,4 +14,4 @@
 
 > Les notes affichées dans la RecyclerView ne sont pas sélectionnables ni cliquables. Comment procéderiez-vous si vous souhaitiez proposer une interface persmettant de sélectionner une note pour l’éditer ?
 
-C'est de la bricole. Soit faire a la main (implémenter ClickListener depuis le view holder et faire remonter l'élénement. Il faut aussi faire à la main de changement de l'état de l'élément de la liste). Soit utiliser une librairie en plus (a chercher) qui permet de le faire mais qui pue vraiment.
+C'est de la bricole. Soit faire a la main (implémenter ClickListener depuis le view holder et faire remonter l'événement. Il faut aussi faire à la main de changement de l'état de l'élément de la liste). Soit utiliser une librairie en plus (a chercher) qui permet de le faire mais qui pue vraiment.
