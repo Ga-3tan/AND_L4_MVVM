@@ -16,13 +16,13 @@ class MainActivity : AppCompatActivity() {
     }
 
     val notesViewModel: NotesViewModel by viewModels()
-    
+
     override fun onOptionsItemSelected(item: MenuItem): Boolean {
         return when(item.itemId) {
             R.id.main_menu_sorting_button_creation_date -> { println("PRESSED: Creation date"); true }
             R.id.main_menu_sorting_button_ETA -> { println("PRESSED: ETA"); true }
-            R.id.main_menu_sorting_button_generate -> { println("PRESSED: Generate"); true }
-            R.id.main_menu_sorting_button_delete_all -> { println("PRESSED: Delete"); true }
+            R.id.main_menu_sorting_button_generate -> { notesViewModel.generateANote(); true }
+            R.id.main_menu_sorting_button_delete_all -> { notesViewModel.deleteAllNotes(); true }
             R.id.main_menu_large_sorting_button_creation_date -> { println("PRESSED: Large creation date"); true }
             R.id.main_menu_large_sorting_button_ETA -> { println("PRESSED: Large ETA"); true }
             else -> super.onOptionsItemSelected(item)
