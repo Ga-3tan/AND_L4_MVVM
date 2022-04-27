@@ -7,6 +7,7 @@ import androidx.room.RoomDatabase
 import androidx.room.TypeConverters
 import heig.and.lab4.converters.CalendarConverter
 import heig.and.lab4.models.Note
+import heig.and.lab4.models.NoteAndSchedule
 import heig.and.lab4.models.Schedule
 
 @Database(
@@ -34,5 +35,3 @@ abstract class NoteDatabase : RoomDatabase() {
         }
     }
 }
-
-// TODO REPOSITORY (slide 42)

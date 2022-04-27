@@ -8,4 +8,13 @@
     <string name="creation_date">Creation date</string>
     <string name="eta">ETA</string>
     <string name="note_list_item_icon">note list item icon</string>
+    <string name="late_schedule_state">late</string>
+    <plurals name="due_weeks_schedule_state">
+        <item quantity="one">%1$d week</item>
+        <item quantity="other">%1$d weeks</item>
+    </plurals>
+    <plurals name="due_months_schedule_state">
+        <item quantity="one">%1$d month</item>
+        <item quantity="other">%1$d months</item>
+    </plurals>
 </resources>

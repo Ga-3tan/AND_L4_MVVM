@@ -1,5 +1,8 @@
 package heig.and.lab4
 
+import android.graphics.Color
+import android.graphics.ColorFilter
+import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -10,8 +13,11 @@ import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.RecyclerView
 import heig.and.lab4.models.NoteAndSchedule
 import heig.and.lab4.models.Type
+import java.util.*
+import java.util.concurrent.TimeUnit
 
-class NoteListAdapter(_items: List<NoteAndSchedule> = listOf()) : RecyclerView.Adapter<NoteListAdapter.ViewHolder>() {
+class NoteListAdapter(_items: List<NoteAndSchedule> = listOf()) :
+    RecyclerView.Adapter<NoteListAdapter.ViewHolder>() {
     // Items in the list
     private var items = listOf<NoteAndSchedule>()
         set(value) {
@@ -22,10 +28,18 @@ class NoteListAdapter(_items: List<NoteAndSchedule> = listOf()) : RecyclerView.A
             diffItems.dispatchUpdatesTo(this)
         }
 
-    init { items = _items }
+    init {
+        items = _items
+    }
+
+    public fun setNotes(newNotes: List<NoteAndSchedule>) {
+        items = newNotes
+    }
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ViewHolder {
-        return ViewHolder(LayoutInflater.from(parent.context).inflate(R.layout.note_list_item, parent, false))
+        return ViewHolder(
+            LayoutInflater.from(parent.context).inflate(R.layout.note_list_item, parent, false)
+        )
     }
 
     override fun onBindViewHolder(holder: ViewHolder, position: Int) {
@@ -50,21 +64,36 @@ class NoteListAdapter(_items: List<NoteAndSchedule> = listOf()) : RecyclerView.A
         fun bind(noteAndSchedule: NoteAndSchedule) {
             // Set up the main part
             when (noteAndSchedule.note.type) {
-                Type.FAMILY -> noteImage.setImageDrawable(AppCompatResources.getDrawable(view.context,
-                    R.drawable.family
-                ))
-                Type.SHOPPING -> noteImage.setImageDrawable(AppCompatResources.getDrawable(view.context,
-                    R.drawable.shopping
-                ))
-                Type.TODO -> noteImage.setImageDrawable(AppCompatResources.getDrawable(view.context,
-                    R.drawable.todo
-                ))
-                Type.WORK -> noteImage.setImageDrawable(AppCompatResources.getDrawable(view.context,
-                    R.drawable.work
-                ))
-                Type.NONE -> noteImage.setImageDrawable(AppCompatResources.getDrawable(view.context,
-                    R.drawable.note
-                ))
+                Type.FAMILY -> noteImage.setImageDrawable(
+                    AppCompatResources.getDrawable(
+                        view.context,
+                        R.drawable.family
+                    )
+                )
+                Type.SHOPPING -> noteImage.setImageDrawable(
+                    AppCompatResources.getDrawable(
+                        view.context,
+                        R.drawable.shopping
+                    )
+                )
+                Type.TODO -> noteImage.setImageDrawable(
+                    AppCompatResources.getDrawable(
+                        view.context,
+                        R.drawable.todo
+                    )
+                )
+                Type.WORK -> noteImage.setImageDrawable(
+                    AppCompatResources.getDrawable(
+                        view.context,
+                        R.drawable.work
+                    )
+                )
+                Type.NONE -> noteImage.setImageDrawable(
+                    AppCompatResources.getDrawable(
+                        view.context,
+                        R.drawable.note
+                    )
+                )
             }
 
             noteTitle.text = noteAndSchedule.note.title
@@ -74,7 +103,34 @@ class NoteListAdapter(_items: List<NoteAndSchedule> = listOf()) : RecyclerView.A
             if (noteAndSchedule.schedule != null) {
                 noteClockImage.visibility = View.VISIBLE
                 noteSchedule.visibility = View.VISIBLE
-                noteSchedule.text = noteAndSchedule.schedule.toString()
+
+                val currentDate = Calendar.getInstance().time
+
+                val diff: Long = currentDate.time - noteAndSchedule.schedule.date.time.time
+                val daysDiff = TimeUnit.MILLISECONDS.toDays(-diff)
+
+                when {
+                    diff > 0 -> {
+                        noteClockImage.setColorFilter(Color.RED)
+                        noteSchedule.text = LabApp.resourses.getString(R.string.late_schedule_state)
+                    }
+                    daysDiff < 30 -> {
+                        val weeksDiff = (daysDiff / 7).toInt()
+                        noteSchedule.text = LabApp.resourses.getQuantityString(
+                            R.plurals.due_weeks_schedule_state,
+                            weeksDiff,
+                            weeksDiff // jsp pourquoi on doit mettre 2 fois mais c'est obligatoire
+                        )
+                    }
+                    else -> {
+                        val monthsDiff = (daysDiff / 30).toInt()
+                        noteSchedule.text = LabApp.resourses.getQuantityString(
+                            R.plurals.due_months_schedule_state,
+                            monthsDiff,
+                            monthsDiff // jsp pourquoi on doit mettre 2 fois mais c'est obligatoire
+                        )
+                    }
+                }
             } else {
                 noteClockImage.visibility = View.GONE
                 noteSchedule.visibility = View.GONE
@@ -85,7 +141,10 @@ class NoteListAdapter(_items: List<NoteAndSchedule> = listOf()) : RecyclerView.A
     /**
      * Used to compute differences between an old list and a new list (to update the RecyclerView)
      */
-    inner class NoteDiffCallback (private val oldList: List<NoteAndSchedule>, private val newList: List<NoteAndSchedule>) : DiffUtil.Callback() {
+    inner class NoteDiffCallback(
+        private val oldList: List<NoteAndSchedule>,
+        private val newList: List<NoteAndSchedule>
+    ) : DiffUtil.Callback() {
         override fun getOldListSize(): Int = oldList.size
 
         override fun getNewListSize(): Int = newList.size

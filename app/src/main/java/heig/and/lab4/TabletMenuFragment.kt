@@ -38,7 +38,9 @@ class TabletMenuFragment : Fragment() {
         return inflater.inflate(R.layout.fragment_tablet_menu, container, false)
     }
 
-    private val notesViewModel: NotesViewModel by activityViewModels()
+    private val notesViewModel: NotesViewModel by activityViewModels {
+        NotesViewModelFactory((requireActivity().application as LabApp).repository)
+    }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
