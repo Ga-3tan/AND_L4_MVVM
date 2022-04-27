@@ -1,15 +1,22 @@
 package heig.and.lab4
 
+import android.app.Application
 import android.os.Bundle
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import androidx.fragment.app.activityViewModels
+import androidx.recyclerview.widget.LinearLayoutManager
+import androidx.recyclerview.widget.RecyclerView
 
 // TODO: Rename parameter arguments, choose names that match
 // the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
 private const val ARG_PARAM1 = "param1"
 private const val ARG_PARAM2 = "param2"
+
+// The recycler view
+private lateinit var recyclerView: RecyclerView
 
 /**
  * A simple [Fragment] subclass.
@@ -35,6 +42,25 @@ class NoteListFragment : Fragment() {
     ): View? {
         // Inflate the layout for this fragment
         return inflater.inflate(R.layout.fragment_note_list, container, false)
+    }
+
+    private val notesViewModel: NotesViewModel by activityViewModels {
+        NotesViewModelFactory((requireActivity().application as LabApp).repository)
+    }
+
+    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
+        super.onViewCreated(view, savedInstanceState)
+
+        // Gets the recycler view
+        recyclerView = view.findViewById(R.id.note_list_recyclerView)
+        val adapter = NoteListAdapter()
+        recyclerView.adapter = adapter
+        recyclerView.layoutManager = LinearLayoutManager(view.context)
+
+        // Adds list data observer
+        notesViewModel.allNotes.observe(viewLifecycleOwner) {
+            adapter.setNotes(notesViewModel.allNotes.value!!)
+        }
     }
 
     companion object {
