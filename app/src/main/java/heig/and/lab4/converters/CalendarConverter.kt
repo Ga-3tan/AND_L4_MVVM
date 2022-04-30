@@ -3,6 +3,10 @@ package heig.and.lab4.converters
 import androidx.room.TypeConverter
 import java.util.*
 
+/**
+ * Authors : Zwick Gaétan, Maziero Marco, Lamrani Soulaymane
+ * Date : 30.04.2022
+ */
 class CalendarConverter {
 
     @TypeConverter

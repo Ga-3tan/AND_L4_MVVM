@@ -5,29 +5,24 @@ import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.Button
+import android.widget.TextView
 import androidx.fragment.app.activityViewModels
 
-// TODO: Rename parameter arguments, choose names that match
-// the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
-private const val ARG_PARAM1 = "param1"
-private const val ARG_PARAM2 = "param2"
-
 /**
- * A simple [Fragment] subclass.
- * Use the [TabletMenuFragment.newInstance] factory method to
- * create an instance of this fragment.
+ * Authors : Zwick Gaétan, Maziero Marco, Lamrani Soulaymane
+ * Date : 30.04.2022
  */
 class TabletMenuFragment : Fragment() {
-    // TODO: Rename and change types of parameters
-    private var param1: String? = null
-    private var param2: String? = null
 
-    override fun onCreate(savedInstanceState: Bundle?) {
-        super.onCreate(savedInstanceState)
-        arguments?.let {
-            param1 = it.getString(ARG_PARAM1)
-            param2 = it.getString(ARG_PARAM2)
-        }
+    // UI Elements
+    private lateinit var noteCounter: TextView
+    private lateinit var generateButton: Button
+    private lateinit var deleteButton: Button
+
+    // The view model
+    private val notesViewModel: NotesViewModel by activityViewModels {
+        NotesViewModelFactory((requireActivity().application as LabApp).repository)
     }
 
     override fun onCreateView(
@@ -38,32 +33,26 @@ class TabletMenuFragment : Fragment() {
         return inflater.inflate(R.layout.fragment_tablet_menu, container, false)
     }
 
-    private val notesViewModel: NotesViewModel by activityViewModels {
-        NotesViewModelFactory((requireActivity().application as LabApp).repository)
-    }
-
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
-    }
+        // Retrieves UI elements
+        noteCounter = view.findViewById(R.id.tablet_menu_amount)
+        generateButton = view.findViewById(R.id.tablet_menu_button_generate)
+        deleteButton = view.findViewById(R.id.tablet_menu_button_delete)
 
-    companion object {
-        /**
-         * Use this factory method to create a new instance of
-         * this fragment using the provided parameters.
-         *
-         * @param param1 Parameter 1.
-         * @param param2 Parameter 2.
-         * @return A new instance of fragment TabletMenuFragment.
-         */
-        // TODO: Rename and change types and number of parameters
-        @JvmStatic
-        fun newInstance(param1: String, param2: String) =
-            TabletMenuFragment().apply {
-                arguments = Bundle().apply {
-                    putString(ARG_PARAM1, param1)
-                    putString(ARG_PARAM2, param2)
-                }
-            }
+        // Observes the nb of notes counter
+        notesViewModel.countNotes.observe(viewLifecycleOwner) { counter ->
+            counter.let { noteCounter.text = it.toString() }
+        }
+
+        // Adds event listeners on buttons
+        generateButton.setOnClickListener {
+            notesViewModel.generateANote()
+        }
+
+        deleteButton.setOnClickListener {
+            notesViewModel.deleteAllNotes()
+        }
     }
 }

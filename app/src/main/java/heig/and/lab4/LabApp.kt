@@ -7,6 +7,10 @@ import heig.and.lab4.database.NoteRepository
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.SupervisorJob
 
+/**
+ * Authors : Zwick Gaétan, Maziero Marco, Lamrani Soulaymane
+ * Date : 30.04.2022
+ */
 class LabApp : Application() {
 
     companion object {
