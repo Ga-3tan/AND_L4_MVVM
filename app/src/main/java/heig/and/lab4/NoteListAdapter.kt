@@ -1,8 +1,6 @@
 package heig.and.lab4
 
 import android.graphics.Color
-import android.graphics.ColorFilter
-import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -16,6 +14,10 @@ import heig.and.lab4.models.Type
 import java.util.*
 import java.util.concurrent.TimeUnit
 
+/**
+ * Authors : Zwick Gaétan, Maziero Marco, Lamrani Soulaymane
+ * Date : 30.04.2022
+ */
 class NoteListAdapter(_items: List<NoteAndSchedule> = listOf()) :
     RecyclerView.Adapter<NoteListAdapter.ViewHolder>() {
     // Items in the list
@@ -32,7 +34,7 @@ class NoteListAdapter(_items: List<NoteAndSchedule> = listOf()) :
         items = _items
     }
 
-    public fun setNotes(newNotes: List<NoteAndSchedule>) {
+    fun setNotes(newNotes: List<NoteAndSchedule>) {
         items = newNotes
     }
 

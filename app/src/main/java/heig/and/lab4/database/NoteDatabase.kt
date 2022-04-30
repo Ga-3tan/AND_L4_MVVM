@@ -7,9 +7,12 @@ import androidx.room.RoomDatabase
 import androidx.room.TypeConverters
 import heig.and.lab4.converters.CalendarConverter
 import heig.and.lab4.models.Note
-import heig.and.lab4.models.NoteAndSchedule
 import heig.and.lab4.models.Schedule
 
+/**
+ * Authors : Zwick Gaétan, Maziero Marco, Lamrani Soulaymane
+ * Date : 30.04.2022
+ */
 @Database(
     entities = [Note::class, Schedule::class],
     version = 1,
