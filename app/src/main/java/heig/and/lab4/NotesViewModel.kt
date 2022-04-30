@@ -51,9 +51,6 @@ class NotesViewModel(private val repository: NoteRepository) : ViewModel() {
      */
     fun sortNotesByCreationDate() {
         _allNotesOption.value = 0
-        println("ETA: " + repository.allNotesETA.value.toString())
-        println("CreatDate: " + repository.allNotesCreationDate.value.toString())
-        println("All: " + repository.allNotes.value.toString())
     }
 
     /**
