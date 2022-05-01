@@ -48,9 +48,9 @@ On remarque que pour déclencher le notify au changement de la live data de note
 
 Il existe certains problèmes de performances lorsque beaucoup de données sont présentes dans la base de données. En effet, si l'UI observe une live data qui pointe vers des données de la base de données, il y aura une requête que sera faite à chaque fois qu'une ligne de la base de données est modifiée (même si cette ligne n'est pas dans le résultat).
 
-Des requêtes de type `SELECT * FROM table` vont charger toutes les données de la table `table` en mémoire. Cela n'est pas adapté si il y a beaucoup de données.
+Des requêtes de type `SELECT * FROM table` vont charger toutes les données de la table `table` en mémoire. Cela n'est pas adapté si il y a beaucoup de données (car on récupère toutes les notes d'un coup).
 
-Une autre approche serait de contrôler manuellement les requêtes faites à la base de données au lieu de passer par des live data. Cela évite des requêtes inutiles. Une autre option serait de faire ne pas charger trop de données en mémoire avec des requêtes trop générales.
+On pourrait résoudre ce problème en faisant de la pagination (avec Paging de Jetpack) pour récupérer des bouts ou bien utiliser un Flow afin de recevoir des données "en live" tel un stream depuis base de donnée (au lieu de tout attendre d'un coup)
 
 ---
 
