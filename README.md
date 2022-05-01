@@ -14,7 +14,7 @@ NotesViewModel, car comme vu en cours, dès qu'il s'agit de faire une sauvegarde
 d'état (donc pas sauvegarde persistant), il faut sauver l'information dans le
 ViewModel histoire que la variable ne soit pas réinitialisée lorsque que
 l'activité est détruite puis reconstruite (pendant un changement d'orientation
-paysage <-> portrait).
+paysage ⟷ portrait).
 
 Et voici comment nous avons mis en œuvre la sauvegarde du tri de la liste de
 notes.
@@ -49,7 +49,7 @@ Pour avoir des éléments cliquable dans le RecyclerView, il faut implémenter u
 qui contient la disposition d'un élément individuel dans la liste. Et
 l'`Adapter` crée les `ViewHolder` selon le besoin.
 
-Dans la  documentation[^1] Android, nous pouvons voir qu'en définissant une
+Dans la documentation[^1] Android, nous pouvons voir qu'en définissant une
 classe `ViewHolder` à l'intérieur d'un `Adapter` custom, on peut définir un
 *click listener* sur la vue.
 
